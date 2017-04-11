@@ -1,0 +1,53 @@
+package murali.foodie;
+
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
+
+public class Main2Activity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+    }
+
+    public void add(View view)
+    {
+        EditText e1=(EditText)findViewById(R.id.editText2);
+        EditText e2=(EditText)findViewById(R.id.editText3);
+        DBHandler db = new DBHandler(this);
+        try {
+            db.additems(new Shop("murali", 910));
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(this, "Error is "+e, Toast.LENGTH_SHORT).show();
+            Log.d("eror","Error is "+e);
+        }
+            Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+    }
+
+    public void disp(View view) {
+        TextView tv = (TextView) findViewById(R.id.textView2);
+
+        DBHandler db = new DBHandler(this);
+        Log.d("Reading: ", "Reading all shops..");
+        List<Shop> shops = db.getAll();
+        String log="";
+        for (Shop shop : shops) {
+            log =log+"Id:"+shop.getItemId() + " ,Name: " + shop.getItem() + " ,Address: " + shop.getPrice();
+// Writing shops to log
+            Log.d("Shop: : ", log);
+
+        }
+        tv.setText(log);
+    }
+}

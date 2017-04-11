@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 /**
  * Created by Student on 04-04-2017.
@@ -17,7 +18,7 @@ public class LoginDataBaseAdapter {
     // TODO: Create public field for each column in your table.
 // SQL Statement to create a new database.
     static final String DATABASE_CREATE = "create table "+"LOGIN"+
-            "( " +"ID"+" integer primary key autoincrement,"+ "USERNAME text primary key,PASSWORD text); ";
+            "( " +"ID"+" integer primary key autoincrement,"+ "USERNAME text ,PASSWORD text); ";
     // Variable to hold the database instance
     public SQLiteDatabase db;
     // Context of the application using the database.
@@ -52,7 +53,18 @@ public class LoginDataBaseAdapter {
         newValues.put("PASSWORD",password);
 
 // Insert the row into your table
-        db.insert("LOGIN", null, newValues);
+        Cursor cursor=db.query("LOGIN", null, " USERNAME=?", new String[]{userName}, null, null, null);
+        if(cursor.getCount()<1)
+        {
+            cursor.close();
+            Toast.makeText(context, "Registered Successfully", Toast.LENGTH_SHORT).show();
+            db.insert("LOGIN", null, newValues);
+        }
+        else
+        {
+            Toast.makeText(context, "Username already exists", Toast.LENGTH_SHORT).show();
+        }
+
 ///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
     }
     public int deleteEntry(String UserName)

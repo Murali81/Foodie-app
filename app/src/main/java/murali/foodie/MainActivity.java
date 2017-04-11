@@ -77,5 +77,10 @@ public class MainActivity extends AppCompatActivity {
 // Close The Database
         loginDataBaseAdapter.close();
     }
+    public void vendors(View view)
+    {
+        Intent intent=new Intent(this,Main2Activity.class);
+        startActivity(intent);
+    }
 }
 

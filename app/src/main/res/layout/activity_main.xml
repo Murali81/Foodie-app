@@ -48,4 +48,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/buttonSignIN"
         android:layout_gravity="center"/>
+
+    <Button
+        android:text="Vendor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:onClick="vendors"/>
 </LinearLayout>
