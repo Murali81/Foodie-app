@@ -31,7 +31,7 @@ public class Main2Activity extends AppCompatActivity {
         }
         catch(Exception e)
         {
-            Toast.makeText(this, "Error is "+e, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error is "+e+" ", Toast.LENGTH_SHORT).show();
             Log.d("eror","Error is "+e);
         }
             Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
