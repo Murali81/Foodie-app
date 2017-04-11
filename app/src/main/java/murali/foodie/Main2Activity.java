@@ -23,9 +23,11 @@ public class Main2Activity extends AppCompatActivity {
     {
         EditText e1=(EditText)findViewById(R.id.editText2);
         EditText e2=(EditText)findViewById(R.id.editText3);
+        String itemname=e1.getText().toString();
+        int price=Integer.parseInt(e2.getText().toString());
         DBHandler db = new DBHandler(this);
         try {
-            db.additems(new Shop("murali", 910));
+            db.additems(new Shop(itemname,price));
         }
         catch(Exception e)
         {
