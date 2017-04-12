@@ -1,5 +1,4 @@
 package murali.foodie;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +45,7 @@ public class Main2Activity extends AppCompatActivity {
         String log="";
         for (Shop shop : shops) {
             log =log+"Id:"+shop.getItemId() + " ,Name: " + shop.getItem() + " ,Address: " + shop.getPrice();
-// Writing shops to log
+            // Writing shops to log
             Log.d("Shop: : ", log);
 
         }
