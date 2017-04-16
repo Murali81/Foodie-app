@@ -26,7 +26,7 @@ public class Main2Activity extends AppCompatActivity {
         int price=Integer.parseInt(e2.getText().toString());
         DBHandler db = new DBHandler(this);
         try {
-            db.additems(new Shop(itemname,price));
+               db.additems(new Shop(itemname,price));
         }
         catch(Exception e)
         {
@@ -44,7 +44,7 @@ public class Main2Activity extends AppCompatActivity {
         List<Shop> shops = db.getAll();
         String log="";
         for (Shop shop : shops) {
-            log =log+"Id:"+shop.getItemId() + " ,Name: " + shop.getItem() + " ,Address: " + shop.getPrice();
+            log =log+"Id:"+shop.getItemId() + " ,Name: " + shop.getItem() + " ,Address: " + shop.getPrice()+"\n";
             // Writing shops to log
             Log.d("Shop: : ", log);
 

@@ -82,5 +82,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this,Main2Activity.class);
         startActivity(intent);
     }
+    public void orderlist(View view)
+    {
+        Intent intent=new Intent(this,Main3Activity.class);
+        startActivity(intent);
+    }
 }
 

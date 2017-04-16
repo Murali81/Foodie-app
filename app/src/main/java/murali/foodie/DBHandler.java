@@ -39,7 +39,7 @@ public class DBHandler extends SQLiteOpenHelper{
     {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
-        contentValues.put(key_itemid,shop.getItemId());
+       // contentValues.put(key_itemid,shop.getItemId());
         contentValues.put(key_item,shop.getItem());
         contentValues.put(key_price,shop.getPrice());
         db.insert(table_name,null,contentValues);db.close();

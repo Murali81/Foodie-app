@@ -18,7 +18,9 @@
         <activity android:name=".Login" />
         <activity android:name=".SignUp" />
         <activity android:name=".Main2Activity" />
-        <activity android:name=".OrdersList"></activity>
+        <!-- <activity android:name=".OrdersList" /> -->
+        <activity android:name=".Main3Activity" />
+        <activity android:name=".idle"></activity>
     </application>
 
 </manifest>
