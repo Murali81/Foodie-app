@@ -1,6 +1,7 @@
 package murali.foodie;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,9 @@ public class Main3Activity extends AppCompatActivity {
     List<Button> allminus = new ArrayList<Button>();
     List<View> allviews=new ArrayList<View>();
 //    View newview;
+ArrayList<String> result=new ArrayList<String>();
+    ArrayList<String> itemname=new ArrayList<String>();
+    ArrayList<String> price=new ArrayList<String>();
     int count = 0;
 
     @Override
@@ -42,6 +46,8 @@ public class Main3Activity extends AppCompatActivity {
             Log.d("Shop: : ", log);
 //            TextView tv = new TextView(this);
 //            tv.setText(log);
+            itemname.add(shop.getItem());
+            price.add(shop.getPrice()+"");
 //            tv.setId(count + 1);
 //
 //            EditText et = new EditText(this);
@@ -80,25 +86,6 @@ public class Main3Activity extends AppCompatActivity {
             allEds.get(count).setId(count+3);
 
 //            minus1.setId(count+4);
-            View newview=allviews.get(count);
-            allplus.get(count).setOnClickListener(new newview.OnClickListener() {
-                @Override
-                public void onClick(newview view) {
-                    int val=Integer.parseInt(allEds.get(count).getText().toString());
-                    val=val+1;
-                    allEds.get(count).setText(val+"");
-                }
-            });
-            allminus.get(count).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int val=Integer.parseInt(allEds.get(count).getText().toString());
-                    if(val==0) val=0;
-                    else
-                        val=val-1;
-                    allEds.get(count).setText(val+"");
-                }
-            });
             Toast.makeText(this, "Hete"+count, Toast.LENGTH_SHORT).show();
             l1.addView(myView);
         count=count+1;
@@ -109,18 +96,33 @@ public class Main3Activity extends AppCompatActivity {
             public void onClick(View view) {
                 String[] strings = new String[allEds.size()];
 
-                for(int i=0; i < allEds.size(); i++){
+                for(int i=0; i < allEds.size(); i++)
+                {
                     strings[i] = allEds.get(i).getText().toString();
-                    Toast.makeText(Main3Activity.this, strings[i], Toast.LENGTH_SHORT).show();
+                    if (Integer.parseInt(strings[i]) > 0)
+                    {
+                        result.add(itemname.get(i) + "," + price.get(i) + "," + strings[i]);
+                        Toast.makeText(Main3Activity.this, itemname.get(i) + "," + price.get(i) + "," + strings[i], Toast.LENGTH_SHORT).show();
+                    }
+                }
+                try {
+                    Intent intent = new Intent(Main3Activity.this, Main4Activity.class);
+                    // Intent intent=new Intent(Main3Activity,Main4Activity.class);
+                    intent.putStringArrayListExtra("results", result);
+                    startActivity(intent);
+                    Toast.makeText(Main3Activity.this, "Tada", Toast.LENGTH_SHORT).show();
+                }
+                catch(Exception e)
+                {
+                    Toast.makeText(Main3Activity.this, "", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     l1.addView(cart);
 
-
     }
-//    View.OnClickListener setbt(final int cnt,final int val) {
-//        return new View.OnClickListener() {
+  // View.OnClickListener setbt(final int cnt,final int val)
+    //        return new View.OnClickListener() {
 //            public void onClick(View v) {
 //                int res=val+1;
 //                allEds.get(cnt).setText(res+"");

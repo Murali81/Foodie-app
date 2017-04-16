@@ -20,7 +20,8 @@
         <activity android:name=".Main2Activity" />
         <!-- <activity android:name=".OrdersList" /> -->
         <activity android:name=".Main3Activity" />
-        <activity android:name=".idle"></activity>
+        <activity android:name=".idle" />
+        <activity android:name=".Main4Activity"></activity>
     </application>
 
 </manifest>
