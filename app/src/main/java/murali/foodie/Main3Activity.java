@@ -22,9 +22,9 @@ public class Main3Activity extends AppCompatActivity {
     List<Button> allminus = new ArrayList<Button>();
     List<View> allviews=new ArrayList<View>();
 //    View newview;
-ArrayList<String> result=new ArrayList<String>();
     ArrayList<String> itemname=new ArrayList<String>();
     ArrayList<String> price=new ArrayList<String>();
+    static String string="Proceed to cart";
     int count = 0;
 
     @Override
@@ -93,9 +93,11 @@ ArrayList<String> result=new ArrayList<String>();
         count=count+1;
         }
         Button cart=new Button(this);
+        cart.setText(string);
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<String> result=new ArrayList<String>();
                 String[] strings = new String[allEds.size()];
 
                 for(int i=0; i < allEds.size(); i++)
@@ -121,8 +123,7 @@ ArrayList<String> result=new ArrayList<String>();
             }
         });
     l1.addView(cart);
-
-    }
+ }
   // View.OnClickListener setbt(final int cnt,final int val)
     //        return new View.OnClickListener() {
 //            public void onClick(View v) {

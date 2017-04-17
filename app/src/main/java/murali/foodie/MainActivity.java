@@ -63,9 +63,16 @@ public class MainActivity extends AppCompatActivity {
         String storedPassword = loginDataBaseAdapter.getSinlgeEntry(userName);
 
 // check if the Stored password matches with Password entered by user
-        if (password.equals(storedPassword)) {
+        if(userName.equals("dhaba")&&password.equals(storedPassword))
+        {
             Toast.makeText(MainActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
-
+            Intent intent=new Intent(this,Main2Activity.class);
+            startActivity(intent);
+        }
+      else if (password.equals(storedPassword)) {
+            Toast.makeText(MainActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+            Intent intent=new Intent(this,Main3Activity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(MainActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
         }

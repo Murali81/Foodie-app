@@ -19,7 +19,7 @@
         android:text="Quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/price"
+        android:id="@+id/qty"
         android:textSize="20dp"
         android:layout_marginEnd="34dp"
         android:layout_marginTop="58dp"
@@ -30,10 +30,10 @@
         android:text="Price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/qty"
+        android:id="@+id/price"
         android:textSize="20dp"
-        android:layout_alignBaseline="@+id/price"
-        android:layout_alignBottom="@+id/price"
+        android:layout_alignBaseline="@+id/qty"
+        android:layout_alignBottom="@+id/qty"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
