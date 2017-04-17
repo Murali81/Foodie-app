@@ -1,6 +1,9 @@
 package murali.foodie;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,24 +21,32 @@ public class Main4Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main4);
         LinearLayout l1=(LinearLayout)findViewById(R.id.act4);
         ArrayList<String> results=getIntent().getStringArrayListExtra("results");
-       String res[]=new String[3];
+        LayoutInflater linflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        String res[]=new String[3];
         int total=0;
         for(int k=0;k<results.size();k++)
         {
             res=results.get(k).split(",");
-            TextView tv=new TextView(this);
-            tv.setText("\t\t\t\t\t\t\t\t"+res[0]+"\t\t\t\t\t\t\t\t\t\t\t\t"+res[1]+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+res[2]);
-            tv.setTextSize(30);
+            final View myView = linflater.inflate(R.layout.cartview, null);
+            TextView tv1 = (TextView)myView.findViewById(R.id.item);
+            TextView tv2 = (TextView)myView.findViewById(R.id.price);
+            TextView tv3 = (TextView)myView.findViewById(R.id.qty);
+            tv1.setText(res[0]);
+            tv2.setText(res[1]);
+            tv3.setText(res[2]);
+//            TextView tv=new TextView(this);
+//            tv.setText("\t\t\t\t\t\t\t\t"+res[0]+"\t\t\t\t\t\t\t\t\t\t\t\t"+res[1]+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+res[2]);
+//            tv.setTextSize(30);
             total=total+Integer.parseInt(res[1])*Integer.parseInt(res[2]);
-            l1.addView(tv);
+            l1.addView(myView);
         }
-        TextView tv1=new TextView(this);
-        tv1.setText("-----------------------------------------------------------------------------------------------------------------");
-        tv1.setLayoutParams(new LinearLayout.LayoutParams(1200,50));
-        l1.addView(tv1);
-        TextView tv2=new TextView(this);
-        tv2.setText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+"Total :"+total);
-        tv2.setTextSize(30);
-        l1.addView(tv2);
+        TextView tv4=new TextView(this);
+        tv4.setText("-----------------------------------------------------------------------------------------------------------------");
+        tv4.setLayoutParams(new LinearLayout.LayoutParams(1200,50));
+        l1.addView(tv4);
+        TextView tv5=new TextView(this);
+        tv5.setText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+"Total :"+total);
+        tv5.setTextSize(30);
+        l1.addView(tv5);
     }
 }
