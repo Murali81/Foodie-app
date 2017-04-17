@@ -2,6 +2,7 @@ package murali.foodie;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -86,6 +87,41 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent=new Intent(this,Main3Activity.class);
         startActivity(intent);
+    }
+    public void send(View view)
+    {
+        new Thread(new Runnable() {
+
+            public void run() {
+
+                try {
+
+                    GMailSender sender = new GMailSender(
+
+                            "foodie.bmu@gmail.com",
+
+                            "foodieapp1");
+
+
+
+
+                    sender.sendMail("Test mail", "This mail has been sent from android app along with attachment",
+
+                            "foodie.bmu@gmail.com",
+
+                            "k.scientist81@gmail.com");
+
+                } catch (Exception e) {
+
+                    Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+
+
+
+                }
+
+            }
+
+        }).start();
     }
 }
 

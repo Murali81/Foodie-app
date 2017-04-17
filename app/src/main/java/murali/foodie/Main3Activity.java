@@ -68,12 +68,13 @@ ArrayList<String> result=new ArrayList<String>();
    TextView tv = (TextView)myView.findViewById(R.id.title_N1);
    tv.setText(pos);
 
-*/
+*/          TextView tv1 = (TextView)myView.findViewById(R.id.name);
             TextView tv = (TextView)myView.findViewById(R.id.price);
             EditText et = (EditText) myView.findViewById(R.id.qty);
             Button plus1 = (Button) myView.findViewById(R.id.plus);
             Button minus1 = (Button)myView.findViewById(R.id.minus);
-            tv.setText(shop.getPrice()+".");
+            tv1.setText(shop.getItem());
+            tv.setText(shop.getPrice()+"");
             //tv.setId(count+1);
             //et.setId(count+2);
             allEds.add(et);
@@ -86,6 +87,7 @@ ArrayList<String> result=new ArrayList<String>();
             allEds.get(count).setId(count+3);
 
 //            minus1.setId(count+4);
+
             Toast.makeText(this, "Hete"+count, Toast.LENGTH_SHORT).show();
             l1.addView(myView);
         count=count+1;
