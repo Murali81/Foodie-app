@@ -20,6 +20,8 @@ public class Main2Activity extends AppCompatActivity {
 
     public void add(View view)
     {
+        try
+        {
         EditText e1=(EditText)findViewById(R.id.editText2);
         EditText e2=(EditText)findViewById(R.id.editText3);
         String itemname=e1.getText().toString();
@@ -33,7 +35,11 @@ public class Main2Activity extends AppCompatActivity {
             Toast.makeText(this, "Error is "+e+" ", Toast.LENGTH_SHORT).show();
             Log.d("eror","Error is "+e);
         }
-            Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();}
+        catch (Exception e)
+        {
+            Toast.makeText(this, "Enter Valid Input", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void disp(View view) {
@@ -51,18 +57,36 @@ public class Main2Activity extends AppCompatActivity {
         }
         tv.setText(log);
     }
-    public void del(View view)
-    {
-        EditText e7=(EditText)findViewById(R.id.itemdel);
-        DBHandler db = new DBHandler(this);
-        db.dltitem(e7.getText().toString());
+    public void del(View view) {
+        try {
+            EditText e7 = (EditText) findViewById(R.id.itemdel);
+            DBHandler db = new DBHandler(this);
+            try {
+                String reslt = e7.getText().toString();
+                db.dltitem(reslt);
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "Requested Item Not Present", Toast.LENGTH_SHORT).show();
+            }
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this, "Requested Item Not Present", Toast.LENGTH_SHORT).show();
+        }
     }
     public void updatitem(View view)
     {
+        try{
         EditText e9=(EditText)findViewById(R.id.updat);
         String []resu=new String[2];
         resu=e9.getText().toString().split(" ");
         DBHandler db=new DBHandler(this);
         db.updateShop(resu[0],Integer.parseInt(resu[1]));
     }
+        catch (Exception e)
+        {
+            Toast.makeText(this, "Input must be \'item\' space \'price\' ", Toast.LENGTH_SHORT).show();
+        }
+}
 }
