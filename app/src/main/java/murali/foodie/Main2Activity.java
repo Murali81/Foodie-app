@@ -57,4 +57,12 @@ public class Main2Activity extends AppCompatActivity {
         DBHandler db = new DBHandler(this);
         db.dltitem(e7.getText().toString());
     }
+    public void updatitem(View view)
+    {
+        EditText e9=(EditText)findViewById(R.id.updat);
+        String []resu=new String[2];
+        resu=e9.getText().toString().split(" ");
+        DBHandler db=new DBHandler(this);
+        db.updateShop(resu[0],Integer.parseInt(resu[1]));
+    }
 }
