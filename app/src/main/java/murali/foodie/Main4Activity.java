@@ -46,9 +46,19 @@ public class Main4Activity extends AppCompatActivity {
         tv4.setText("-----------------------------------------------------------------------------------------------------------------");
         tv4.setLayoutParams(new LinearLayout.LayoutParams(1200,50));
         l1.addView(tv4);
-        TextView tv5=new TextView(this);
-        tv5.setText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+"Total :"+total);
-        tv5.setTextSize(30);
-        l1.addView(tv5);
+        if(total==0)
+        {
+            TextView tv7=new TextView(this);
+            tv7.setText("\t\t\t\t\t\t\t\t\t\t\t\t"+"Your cart seems empty");
+            tv7.setTextSize(30);
+            l1.addView(tv7);
+        }
+        else {
+            TextView tv5 = new TextView(this);
+            tv5.setText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "Total :" + total);
+            tv5.setTextSize(30);
+            l1.addView(tv5);
+        }
+
     }
 }

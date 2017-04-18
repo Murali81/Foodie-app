@@ -51,4 +51,10 @@ public class Main2Activity extends AppCompatActivity {
         }
         tv.setText(log);
     }
+    public void del(View view)
+    {
+        EditText e7=(EditText)findViewById(R.id.itemdel);
+        DBHandler db = new DBHandler(this);
+        db.dltitem(e7.getText().toString());
+    }
 }

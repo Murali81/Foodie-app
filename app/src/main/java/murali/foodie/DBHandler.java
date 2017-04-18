@@ -47,7 +47,15 @@ public class DBHandler extends SQLiteOpenHelper{
     public void deleteitem(Shop shop)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(table_name,key_itemid+"=?",new String[]{String.valueOf(shop.getItemId())});
+        db.delete(table_name,key_item+"=?",new String[]{String.valueOf(shop.getItem())});
+    db.close();
+    }
+    public void dltitem(String str)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+    //    db.delete(table_name,key_item+"=?",new String[]{String.valueOf(shop.getItem())});
+        db.delete(table_name,key_item+"=?",new String[]{str});
+        db.close();
     }
     public List<Shop> getAll()
     {
@@ -69,6 +77,37 @@ public class DBHandler extends SQLiteOpenHelper{
 // return contact list
         return itemlist;
     }
+    public Shop getShop(String itemname) {
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        Cursor cursor = db.query(table_name, new String[]{key_itemid,
+                key_item, key_price}, key_item + "=?",
+        new String[]{String.valueOf(itemname)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
 
+        Shop contact = new Shop(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), Integer.parseInt(cursor.getString(2)));
+// return shop
+        return contact;
+    }
+    public void updateShop(String itemname,int prize) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(table_name, new String[]{key_itemid,
+                key_item, key_price}, key_item + "=?",
+        new String[]{String.valueOf(itemname)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Shop shop = new Shop(Integer.parseInt(cursor.getString(0)),cursor.getString(1), Integer.parseInt(cursor.getString(2)));
+        db.close();
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_item, shop.getItem());
+        values.put(key_price, String.valueOf(prize));
+// updating row
+       db1.update(table_name, values,key_itemid+ " = ?",new String[]{String.valueOf(shop.getItemId())});
+        db1.close();
+    }
 }

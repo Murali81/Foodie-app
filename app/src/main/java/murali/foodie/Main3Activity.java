@@ -92,7 +92,29 @@ public class Main3Activity extends AppCompatActivity {
             l1.addView(myView);
         count=count+1;
         }
-        Button cart=new Button(this);
+        for(int j=0; j < allEds.size(); j++)
+        {
+            final int finalJ = j;
+            allplus.get(j).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int res=Integer.parseInt(allEds.get(finalJ).getText().toString());
+                    allEds.get(finalJ).setText(res+1+"");
+                }
+            });
+            final int finalJ1 = j;
+            allminus.get(j).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int res=Integer.parseInt(allEds.get(finalJ1).getText().toString());
+                    if(res==0)
+                    allEds.get(finalJ1).setText(0+"");
+                    else
+                        allEds.get(finalJ1).setText(res-1+"");
+                }
+            });
+        }
+            Button cart=new Button(this);
         cart.setText(string);
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,9 +146,9 @@ public class Main3Activity extends AppCompatActivity {
         });
     l1.addView(cart);
  }
-  // View.OnClickListener setbt(final int cnt,final int val)
-    //        return new View.OnClickListener() {
-//            public void onClick(View v) {
+//   View.OnClickListener setbt(final int cnt,final int val)
+//          return new View.OnClickListener() {
+//            public void onClick(View view) {
 //                int res=val+1;
 //                allEds.get(cnt).setText(res+"");
 //                Toast.makeText(Main3Activity.this,"Updated value is"+ allEds.get(cnt).getText().toString(), Toast.LENGTH_SHORT).show();
@@ -135,7 +157,7 @@ public class Main3Activity extends AppCompatActivity {
 //    }
 //    View.OnClickListener setat(final int cnt,final int val) {
 //        return new View.OnClickListener() {
-//            public void onClick(View v) {
+//            public void onClick(View view) {
 //                int res;
 //                if(val==0)res=0;
 //                    else res=val-1;
@@ -144,6 +166,6 @@ public class Main3Activity extends AppCompatActivity {
 //            }
 //        };
 //    }
-//
+
 
 }
