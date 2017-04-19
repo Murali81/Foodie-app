@@ -36,7 +36,7 @@ public class Main4Activity extends AppCompatActivity {
             TextView tv1 = (TextView)myView.findViewById(R.id.item);
             TextView tv2 = (TextView)myView.findViewById(R.id.price);
             TextView tv3 = (TextView)myView.findViewById(R.id.qty);
-            tv1.setText(res[0]);
+            tv1.setText(" "+res[0]);
             tv2.setText(res[1]);
             tv3.setText(res[2]);
             order=order+res[0]+"-"+res[2]+"\n";
