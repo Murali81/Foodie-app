@@ -112,11 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    sender.sendMail("Test mail", "This mail has been sent from android app along with attachment",
-
-                            "foodie.bmu@gmail.com",
-
-                            "k.scientist81@gmail.com");
+                    sender.sendMail("Order Details", "This mail has been sent from android app along with attachment","foodie.bmu@gmail.com","k.scientist81@gmail.com");
 
                 } catch (Exception e) {
 
