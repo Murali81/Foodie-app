@@ -17,10 +17,14 @@ public class LoginDataBaseAdapter {
     public static final int NAME_COLUMN = 1;
     // TODO: Create public field for each column in your table.
 // SQL Statement to create a new database.
+    public static final String key_phone="MobNo";
+    public static final String key_email="Email";
+    public static final String key_name="Name";
     static final String DATABASE_CREATE = "create table "+"LOGIN"+
-            "( " +"ID"+" integer primary key autoincrement,"+ "USERNAME text ,PASSWORD text); ";
+            "( " +"ID"+" integer primary key autoincrement,"+ "USERNAME text ,PASSWORD text ,"+key_phone+" text UNIQUE NOT NULL ,"+key_email+" text UNIQUE NOT NULL ,"+key_name+" text NOT NULL);" ;
     // Variable to hold the database instance
     public SQLiteDatabase db;
+    String res="";
     // Context of the application using the database.
     private final Context context;
     // Database open/upgrade helper
@@ -45,12 +49,15 @@ public class LoginDataBaseAdapter {
         return db;
     }
 
-    public void insertEntry(String userName,String password)
+    public void insertEntry(String userName,String password,String mobnumber,String email,String nameuser)
     {
         ContentValues newValues = new ContentValues();
 // Assign values for each row.
         newValues.put("USERNAME", userName);
         newValues.put("PASSWORD",password);
+        newValues.put(key_phone,mobnumber);
+        newValues.put(key_email,email);
+        newValues.put(key_name,nameuser);
 
 // Insert the row into your table
         Cursor cursor=db.query("LOGIN", null, " USERNAME=?", new String[]{userName}, null, null, null);
@@ -58,7 +65,21 @@ public class LoginDataBaseAdapter {
         {
             cursor.close();
             Toast.makeText(context, "Registered Successfully", Toast.LENGTH_SHORT).show();
-            db.insert("LOGIN", null, newValues);
+           long status=db.insert("LOGIN", null, newValues);
+            if(status>0) Toast.makeText(context, "Worked", Toast.LENGTH_SHORT).show();
+            try {
+                Cursor cursor1 = db.rawQuery("SELECT * FROM LOGIN", null);
+                cursor1.moveToFirst();
+                do {
+                    res = res + "," + cursor1.getString(1);
+                }
+                while (cursor1.moveToNext());
+                Toast.makeText(context, "Values are "+res, Toast.LENGTH_SHORT).show();
+                cursor1.close();
+            }catch (Exception e){
+                Toast.makeText(context, "Error is "+e, Toast.LENGTH_SHORT).show();
+            }
+
         }
         else
         {
@@ -85,8 +106,12 @@ public class LoginDataBaseAdapter {
         }
         cursor.moveToFirst();
         String password= cursor.getString(cursor.getColumnIndex("PASSWORD"));
+        String username= cursor.getString(cursor.getColumnIndex("USERNAME"));
+        String phoneno= cursor.getString(cursor.getColumnIndex(key_phone));
+        String Email= cursor.getString(cursor.getColumnIndex(key_email));
+        String nameuser=cursor.getString(cursor.getColumnIndex(key_name));
         cursor.close();
-        return password;
+        return password+","+username+","+phoneno+","+Email+","+nameuser;
     }
     public void updateEntry(String userName,String password)
     {

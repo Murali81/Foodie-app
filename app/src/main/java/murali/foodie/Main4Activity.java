@@ -22,7 +22,7 @@ public class Main4Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
-
+        final String umail=getIntent().getStringExtra("umail");
         LinearLayout l1=(LinearLayout)findViewById(R.id.act4);
         ArrayList<String> results=getIntent().getStringArrayListExtra("results");
         LayoutInflater linflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -87,6 +87,7 @@ public class Main4Activity extends AppCompatActivity {
 
                             sender.sendMail("Order Details","Dear Customer,\nYour final Order is\n"+finalOrder,"foodie.bmu@gmail.com","k.scientist81@gmail.com");
                             sender.sendMail("Order Details", finalOrder,"foodie.bmu@gmail.com","k.scientist81@gmail.com");
+                           sender.sendMail("Order Details","Dear Customer,\nYour final Order is\n"+finalOrder,"foodie.bmu@gmail.com",umail);
                         } catch (Exception e) {
 
                             Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();

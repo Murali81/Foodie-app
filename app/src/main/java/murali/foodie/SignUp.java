@@ -10,6 +10,10 @@ import android.widget.Toast;
 public class SignUp extends AppCompatActivity {
     EditText editTextUserName,editTextPassword,editTextConfirmPassword;
     Button btnCreateAccount;
+     EditText emailid;
+    EditText phoneno;
+    EditText fullname;
+
     LoginDataBaseAdapter loginDataBaseAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,39 +24,39 @@ public class SignUp extends AppCompatActivity {
 
 // Get Refferences of Views
         editTextUserName=(EditText)findViewById(R.id.editTextUserName);
+        emailid=(EditText)findViewById(R.id.emailet);
+        phoneno=(EditText)findViewById(R.id.phoneet);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
         editTextConfirmPassword=(EditText)findViewById(R.id.editTextConfirmPassword);
+   fullname=(EditText)findViewById(R.id.fullname);
+    }
+    public void signup(View view)
+    {
 
-        btnCreateAccount=(Button)findViewById(R.id.buttonCreateAccount);
-        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-// TODO Auto-generated method stub
-
-                String userName=editTextUserName.getText().toString();
-                String password=editTextPassword.getText().toString();
-                String confirmPassword=editTextConfirmPassword.getText().toString();
-
+        String userName=editTextUserName.getText().toString();
+        String password=editTextPassword.getText().toString();
+        String confirmPassword=editTextConfirmPassword.getText().toString();
+        String phno=phoneno.getText().toString();
+        String emil=emailid.getText().toString();
+        String nameuser=fullname.getText().toString();
 // check if any of the fields are vaccant
-                if(userName.equals("")||password.equals("")||confirmPassword.equals(""))
-                {
-                    Toast.makeText(getApplicationContext(), "Field Vaccant", Toast.LENGTH_LONG).show();
-                    return;
-                }
+        if(userName.equals("")||password.equals("")||confirmPassword.equals(""))
+        {
+            Toast.makeText(getApplicationContext(), "Field Vaccant", Toast.LENGTH_LONG).show();
+            return;
+        }
 // check if both password matches
-                if(!password.equals(confirmPassword))
-                {
-                    Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                else
-                {
+        if(!password.equals(confirmPassword))
+        {
+            Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else
+        {
 // Save the Data in Database
-                    loginDataBaseAdapter.insertEntry(userName, password);
-                   // Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+            loginDataBaseAdapter.insertEntry(userName, password,phno,emil,nameuser);
+            // Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+        }
     }
     @Override
     protected void onDestroy() {

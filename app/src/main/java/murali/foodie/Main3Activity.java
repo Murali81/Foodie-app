@@ -31,8 +31,10 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-
-        LinearLayout l1 = (LinearLayout)findViewById(R.id.activity_main3);
+        String uname = getIntent().getStringExtra("uname");
+        final String umailid = getIntent().getStringExtra("umailid");
+        Toast.makeText(this, "Hello " + uname + " !\nNice to see you here", Toast.LENGTH_SHORT).show();
+        LinearLayout l1 = (LinearLayout) findViewById(R.id.activity_main3);
         DBHandler db = new DBHandler(this);
         LayoutInflater linflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -47,7 +49,7 @@ public class Main3Activity extends AppCompatActivity {
 //            TextView tv = new TextView(this);
 //            tv.setText(log);
             itemname.add(shop.getItem());
-            price.add(shop.getPrice()+"");
+            price.add(shop.getPrice() + "");
 //            tv.setId(count + 1);
 //
 //            EditText et = new EditText(this);
@@ -60,7 +62,7 @@ public class Main3Activity extends AppCompatActivity {
 //            l1.addView(tv);
 //            l1.addView(et);
 //            l1.addView(button);
-           final View myView = linflater.inflate(R.layout.idle, null); //here item is the the layout you want to inflate
+            final View myView = linflater.inflate(R.layout.idle, null); //here item is the the layout you want to inflate
             //myView.setId(count);
             allviews.add(myView);
 /*
@@ -68,13 +70,14 @@ public class Main3Activity extends AppCompatActivity {
    TextView tv = (TextView)myView.findViewById(R.id.title_N1);
    tv.setText(pos);
 
-*/          TextView tv1 = (TextView)myView.findViewById(R.id.name);
-            TextView tv = (TextView)myView.findViewById(R.id.price);
+*/
+            TextView tv1 = (TextView) myView.findViewById(R.id.name);
+            TextView tv = (TextView) myView.findViewById(R.id.price);
             EditText et = (EditText) myView.findViewById(R.id.qty);
             Button plus1 = (Button) myView.findViewById(R.id.plus);
-            Button minus1 = (Button)myView.findViewById(R.id.minus);
+            Button minus1 = (Button) myView.findViewById(R.id.minus);
             tv1.setText(shop.getItem());
-            tv.setText(shop.getPrice()+"");
+            tv.setText(shop.getPrice() + "");
             //tv.setId(count+1);
             //et.setId(count+2);
             allEds.add(et);
@@ -82,70 +85,72 @@ public class Main3Activity extends AppCompatActivity {
             //minus1.setId(count+4);
             allplus.add(plus1);
             allminus.add(minus1);
-            allplus.get(count).setId(count+1);
-            allminus.get(count).setId(count+2);
-            allEds.get(count).setId(count+3);
+            allplus.get(count).setId(count + 1);
+            allminus.get(count).setId(count + 2);
+            allEds.get(count).setId(count + 3);
 
 //            minus1.setId(count+4);
 
-            Toast.makeText(this, "Hete"+count, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Hete" + count, Toast.LENGTH_SHORT).show();
             l1.addView(myView);
-        count=count+1;
+            count = count + 1;
         }
-        for(int j=0; j < allEds.size(); j++)
-        {
+        String[] edts = new String[allEds.size()];
+
+        Button cart = new Button(this);
+        cart.setText(string);
+        for (int j = 0; j < allEds.size(); j++) {
             final int finalJ = j;
             allplus.get(j).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int res=Integer.parseInt(allEds.get(finalJ).getText().toString());
-                    allEds.get(finalJ).setText(res+1+"");
+                    int res = Integer.parseInt(allEds.get(finalJ).getText().toString());
+                    allEds.get(finalJ).setText(res + 1 + "");
                 }
             });
             final int finalJ1 = j;
             allminus.get(j).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int res=Integer.parseInt(allEds.get(finalJ1).getText().toString());
-                    if(res==0)
-                    allEds.get(finalJ1).setText(0+"");
-                    else
-                        allEds.get(finalJ1).setText(res-1+"");
+                    int res = Integer.parseInt(allEds.get(finalJ1).getText().toString());
+                    if (res == 0) {
+                        allEds.get(finalJ1).setText(0 + "");
+                    } else
+                        allEds.get(finalJ1).setText(res - 1 + "");
                 }
             });
         }
-            Button cart=new Button(this);
-        cart.setText(string);
-        cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList<String> result=new ArrayList<String>();
-                String[] strings = new String[allEds.size()];
 
-                for(int i=0; i < allEds.size(); i++)
-                {
-                    strings[i] = allEds.get(i).getText().toString();
-                    if (Integer.parseInt(strings[i]) > 0)
-                    {
-                        result.add(itemname.get(i) + "," + price.get(i) + "," + strings[i]);
-                        Toast.makeText(Main3Activity.this, itemname.get(i) + "," + price.get(i) + "," + strings[i], Toast.LENGTH_SHORT).show();
+
+            cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ArrayList<String> result = new ArrayList<String>();
+                    String[] strings = new String[allEds.size()];
+
+                    for (int i = 0; i < allEds.size(); i++) {
+                        strings[i] = allEds.get(i).getText().toString();
+                        if (Integer.parseInt(strings[i]) > 0) {
+                            result.add(itemname.get(i) + "," + price.get(i) + "," + strings[i]);
+                            Toast.makeText(Main3Activity.this, itemname.get(i) + "," + price.get(i) + "," + strings[i], Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    try {
+                        Intent intent = new Intent(Main3Activity.this, Main4Activity.class);
+                        // Intent intent=new Intent(Main3Activity,Main4Activity.class);
+                        intent.putStringArrayListExtra("results", result);
+                        intent.putExtra("umail", umailid);
+                        startActivity(intent);
+                        Toast.makeText(Main3Activity.this, "Tada", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(Main3Activity.this, "", Toast.LENGTH_SHORT).show();
                     }
                 }
-                try {
-                    Intent intent = new Intent(Main3Activity.this, Main4Activity.class);
-                    // Intent intent=new Intent(Main3Activity,Main4Activity.class);
-                    intent.putStringArrayListExtra("results", result);
-                    startActivity(intent);
-                    Toast.makeText(Main3Activity.this, "Tada", Toast.LENGTH_SHORT).show();
-                }
-                catch(Exception e)
-                {
-                    Toast.makeText(Main3Activity.this, "", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    l1.addView(cart);
- }
+            });
+
+            l1.addView(cart);
+
+    }
 //   View.OnClickListener setbt(final int cnt,final int val)
 //          return new View.OnClickListener() {
 //            public void onClick(View view) {

@@ -33,8 +33,14 @@ public class MainActivity extends AppCompatActivity {
 // TODO Auto-generated method stub
 
 /// Create Intent for SignUpActivity abd Start The Activity
-                Intent intentSignUP=new Intent(getApplicationContext(),SignUp.class);
-                startActivity(intentSignUP);
+                try {
+                    Intent intentSignUP = new Intent(getApplicationContext(), SignUp.class);
+                    startActivity(intentSignUP);
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(MainActivity.this, "Error is "+ e, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -60,7 +66,11 @@ public class MainActivity extends AppCompatActivity {
         String password = editTextPassword.getText().toString();
 
 // fetch the Password form database for respective user name
-        String storedPassword = loginDataBaseAdapter.getSinlgeEntry(userName);
+        String combostring = loginDataBaseAdapter.getSinlgeEntry(userName);
+        String []combi=combostring.split(",");
+        String storedPassword=combi[0];
+        String nameofuser=combi[4];
+        String usermail=combi[3];
 
 // check if the Stored password matches with Password entered by user
         if(userName.equals("dhaba")&&password.equals(storedPassword))
@@ -72,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
       else if (password.equals(storedPassword)) {
             Toast.makeText(MainActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
             Intent intent=new Intent(this,Main3Activity.class);
+            intent.putExtra("uname",nameofuser);
+            intent.putExtra("umailid",usermail);
             startActivity(intent);
         } else {
             Toast.makeText(MainActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
