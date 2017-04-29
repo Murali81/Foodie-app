@@ -2,6 +2,7 @@ package murali.foodie;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static murali.foodie.R.drawable.button_bg_round;
 
 public class Main3Activity extends AppCompatActivity {
     List<EditText> allEds = new ArrayList<EditText>();
@@ -31,8 +34,9 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        String uname = getIntent().getStringExtra("uname");
+        final String uname = getIntent().getStringExtra("uname");
         final String umailid = getIntent().getStringExtra("umailid");
+        final String uphone=getIntent().getStringExtra("uphone");
         Toast.makeText(this, "Hello " + uname + " !\nNice to see you here", Toast.LENGTH_SHORT).show();
         LinearLayout l1 = (LinearLayout) findViewById(R.id.activity_main3);
         DBHandler db = new DBHandler(this);
@@ -77,7 +81,7 @@ public class Main3Activity extends AppCompatActivity {
             Button plus1 = (Button) myView.findViewById(R.id.plus);
             Button minus1 = (Button) myView.findViewById(R.id.minus);
             tv1.setText(shop.getItem());
-            tv.setText(shop.getPrice() + "");
+            tv.setText(shop.getPrice() + "  ₹");
             //tv.setId(count+1);
             //et.setId(count+2);
             allEds.add(et);
@@ -91,7 +95,7 @@ public class Main3Activity extends AppCompatActivity {
 
 //            minus1.setId(count+4);
 
-            Toast.makeText(this, "Hete" + count, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Hete" + count, Toast.LENGTH_SHORT).show();
             l1.addView(myView);
             count = count + 1;
         }
@@ -99,6 +103,8 @@ public class Main3Activity extends AppCompatActivity {
 
         Button cart = new Button(this);
         cart.setText(string);
+   //   cart.setBackgroundColor(077746010);
+     //   cart.setTextColor(0xff0000);
         for (int j = 0; j < allEds.size(); j++) {
             final int finalJ = j;
             allplus.get(j).setOnClickListener(new View.OnClickListener() {
@@ -121,7 +127,7 @@ public class Main3Activity extends AppCompatActivity {
             });
         }
 
-
+      // cart.setBackground(button_bg_round);
             cart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -132,7 +138,7 @@ public class Main3Activity extends AppCompatActivity {
                         strings[i] = allEds.get(i).getText().toString();
                         if (Integer.parseInt(strings[i]) > 0) {
                             result.add(itemname.get(i) + "," + price.get(i) + "," + strings[i]);
-                            Toast.makeText(Main3Activity.this, itemname.get(i) + "," + price.get(i) + "," + strings[i], Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(Main3Activity.this, itemname.get(i) + "," + price.get(i) + "," + strings[i], Toast.LENGTH_SHORT).show();
                         }
                     }
                     try {
@@ -140,10 +146,12 @@ public class Main3Activity extends AppCompatActivity {
                         // Intent intent=new Intent(Main3Activity,Main4Activity.class);
                         intent.putStringArrayListExtra("results", result);
                         intent.putExtra("umail", umailid);
+                        intent.putExtra("uname",uname);
+                        intent.putExtra("uphone",uphone);
                         startActivity(intent);
-                        Toast.makeText(Main3Activity.this, "Tada", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Main3Activity.this, "Tada", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(Main3Activity.this, "", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Main3Activity.this, "Error is "+ e, Toast.LENGTH_SHORT).show();
                     }
                 }
             });

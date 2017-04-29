@@ -1,5 +1,6 @@
 package murali.foodie;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -23,12 +26,25 @@ public class Main4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
         final String umail=getIntent().getStringExtra("umail");
+        final String uname=getIntent().getStringExtra("uname");
+        final String uphone=getIntent().getStringExtra("uphone");
         LinearLayout l1=(LinearLayout)findViewById(R.id.act4);
         ArrayList<String> results=getIntent().getStringArrayListExtra("results");
         LayoutInflater linflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         String res[]=new String[3];
         int total=0;
         String order="";
+        View myw = linflater.inflate(R.layout.cartview, null);
+        TextView tv9 = (TextView)myw.findViewById(R.id.item);
+        TextView tv10 = (TextView)myw.findViewById(R.id.price);
+        TextView tv11 = (TextView)myw.findViewById(R.id.qty);
+        tv9.setText("Item");tv10.setText("Price");tv11.setText("Qty.");
+        l1.addView(myw);
+        TextView tv90=new TextView(this);
+        tv90.setText("---------------------------------------------------------------------------------------------");
+       // tv90.setTextColor(R.color.colorPrimary);
+        tv90.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,50));
+        l1.addView(tv90);
         for(int k=0;k<results.size();k++)
         {
             res=results.get(k).split(",");
@@ -37,7 +53,7 @@ public class Main4Activity extends AppCompatActivity {
             TextView tv2 = (TextView)myView.findViewById(R.id.price);
             TextView tv3 = (TextView)myView.findViewById(R.id.qty);
             tv1.setText(" "+res[0]);
-            tv2.setText(res[1]);
+            tv2.setText(res[1]+" ₹");
             tv3.setText(res[2]);
             order=order+res[0]+"-"+res[2]+"\n";
 //            TextView tv=new TextView(this);
@@ -46,10 +62,10 @@ public class Main4Activity extends AppCompatActivity {
             total=total+Integer.parseInt(res[1])*Integer.parseInt(res[2]);
             l1.addView(myView);
         }
-        order=order+total;
+        order=order+"\nTotal-"+total+" ₹";
         TextView tv4=new TextView(this);
-        tv4.setText("-----------------------------------------------------------------------------------------------------------------");
-        tv4.setLayoutParams(new LinearLayout.LayoutParams(1200,50));
+        tv4.setText("-----------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        tv4.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,50));
         l1.addView(tv4);
         if(total==0)
         {
@@ -78,16 +94,16 @@ public class Main4Activity extends AppCompatActivity {
 
                             GMailSender sender = new GMailSender(
 
-                                    "foodie.bmu@gmail.com",
+                                    "k.suhaas7@gmail.com",
 
-                                    "foodieapp1");
-
-
+                                    "9959440709");
 
 
-                            sender.sendMail("Order Details","Dear Customer,\nYour final Order is\n"+finalOrder,"foodie.bmu@gmail.com","k.scientist81@gmail.com");
-                            sender.sendMail("Order Details", finalOrder,"foodie.bmu@gmail.com","k.scientist81@gmail.com");
-                           sender.sendMail("Order Details","Dear Customer,\nYour final Order is\n"+finalOrder,"foodie.bmu@gmail.com",umail);
+
+
+                            sender.sendMail("Order Details","Dear Customer,\n "+uname+" - "+uphone+"\nYour final Order is\n"+finalOrder,"k.suhaas7@gmail.com","kondragunta.chowdary.15cse@bml.edu.in");
+                       //     sender.sendMail("Order Details", finalOrder,"foodie.bmu@gmail.com","kondragunta.chowdary.15cse@bml.edu.in");
+                          // sender.sendMail("Order Details","Dear Customer,\nYour final Order is\n"+finalOrder,"foodie.bmu@gmail.com",umail);
                         } catch (Exception e) {
 
                             Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
@@ -99,8 +115,16 @@ public class Main4Activity extends AppCompatActivity {
                     }
 
                 }).start();
+                Intent intent=new Intent(getApplicationContext(),updatepass.class);
+                intent.putExtra("umail",umail);
+                intent.putExtra("bill",finalOrder);
+                intent.putExtra("uname",uname);
+                intent.putExtra("uphone",uphone);
+                startActivity(intent);
+
             }
         });
     l1.addView(bt);
     }
+
 }

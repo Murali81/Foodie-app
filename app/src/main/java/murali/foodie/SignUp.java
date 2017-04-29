@@ -1,5 +1,6 @@
 package murali.foodie;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,7 @@ public class SignUp extends AppCompatActivity {
         String emil=emailid.getText().toString();
         String nameuser=fullname.getText().toString();
 // check if any of the fields are vaccant
-        if(userName.equals("")||password.equals("")||confirmPassword.equals(""))
+        if(userName.equals("")||password.equals("")||confirmPassword.equals("")||emil.equals("")||nameuser.equals(""))
         {
             Toast.makeText(getApplicationContext(), "Field Vaccant", Toast.LENGTH_LONG).show();
             return;
@@ -54,8 +55,10 @@ public class SignUp extends AppCompatActivity {
         else
         {
 // Save the Data in Database
-            loginDataBaseAdapter.insertEntry(userName, password,phno,emil,nameuser);
-            // Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+            loginDataBaseAdapter.insertEntry(userName,password,phno,emil,nameuser);
+             Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+            Intent intent=new Intent(this,MainActivity.class);
+            startActivity(intent);
         }
     }
     @Override

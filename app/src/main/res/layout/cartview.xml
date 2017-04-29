@@ -36,4 +36,15 @@
         android:layout_alignBottom="@+id/qty"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:text="X"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_marginEnd="23dp"
+        android:textColor="#f29d13"
+        android:layout_alignBaseline="@+id/qty"
+        android:layout_alignBottom="@+id/qty"
+        android:layout_toStartOf="@+id/qty" />
+
 </RelativeLayout>

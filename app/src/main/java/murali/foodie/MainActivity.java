@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import static murali.foodie.R.id.editTextPassword;
 import static murali.foodie.R.id.editTextUserName;
+import static murali.foodie.R.id.start;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,12 +62,20 @@ public class MainActivity extends AppCompatActivity {
 //
 //            public void onClick(View v) {
 // get The User name and Password
-        String userName;
-        userName = editTextUserName.getText().toString();
-        String password = editTextPassword.getText().toString();
-
+        String userName="";
+        String password="";
+        try {
+            userName = editTextUserName.getText().toString();
+            password = editTextPassword.getText().toString();
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(this, "Fields can't be empty", Toast.LENGTH_SHORT).show();
+        }
 // fetch the Password form database for respective user name
         String combostring = loginDataBaseAdapter.getSinlgeEntry(userName);
+        if(combostring=="No"){
+            Toast.makeText(this, "User Name or Password does not match", Toast.LENGTH_SHORT).show();return;}
         String []combi=combostring.split(",");
         String storedPassword=combi[0];
         String nameofuser=combi[4];
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent=new Intent(this,Main3Activity.class);
             intent.putExtra("uname",nameofuser);
             intent.putExtra("umailid",usermail);
+            intent.putExtra("uphone",combi[2]);
             startActivity(intent);
         } else {
             Toast.makeText(MainActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
@@ -137,6 +147,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }).start();
+    }
+    public void update(View view)
+    {
+        Intent intent=new Intent(this,Main5Activity.class);
+        startActivity(intent);
     }
 }
 

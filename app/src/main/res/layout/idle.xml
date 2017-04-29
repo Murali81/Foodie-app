@@ -37,7 +37,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/minus"
             android:text="-"
-            android:textColor="#dee5ea"
+            android:textSize="15sp"
+            android:textColor="#f29d13"
             android:layout_marginLeft="150dp"
             android:layout_marginRight="7dp"
             android:background="@drawable/button_bg_round"
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/plus"
             android:text="+"
-            android:textColor="#dee5ea"
+            android:textColor="#f29d13"
             android:layout_marginLeft="7dp"
             android:background="@drawable/button_bg_round"
             android:width="10dp"/>

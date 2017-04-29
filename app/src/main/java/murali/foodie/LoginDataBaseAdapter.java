@@ -64,9 +64,9 @@ public class LoginDataBaseAdapter {
         if(cursor.getCount()<1)
         {
             cursor.close();
-            Toast.makeText(context, "Registered Successfully", Toast.LENGTH_SHORT).show();
            long status=db.insert("LOGIN", null, newValues);
-            if(status>0) Toast.makeText(context, "Worked", Toast.LENGTH_SHORT).show();
+            if(status>0) Toast.makeText(context, "Registered Successfully", Toast.LENGTH_SHORT).show();
+            else Toast.makeText(context, "Invalid Field Inputs", Toast.LENGTH_SHORT).show();
             try {
                 Cursor cursor1 = db.rawQuery("SELECT * FROM LOGIN", null);
                 cursor1.moveToFirst();
@@ -74,7 +74,7 @@ public class LoginDataBaseAdapter {
                     res = res + "," + cursor1.getString(1);
                 }
                 while (cursor1.moveToNext());
-                Toast.makeText(context, "Values are "+res, Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(context, "Values are "+res, Toast.LENGTH_SHORT).show();
                 cursor1.close();
             }catch (Exception e){
                 Toast.makeText(context, "Error is "+e, Toast.LENGTH_SHORT).show();
@@ -96,31 +96,44 @@ public class LoginDataBaseAdapter {
 // Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
         return numberOFEntriesDeleted;
     }
-    public String getSinlgeEntry(String userName)
-    {
-        Cursor cursor=db.query("LOGIN", null, " USERNAME=?", new String[]{userName}, null, null, null);
-        if(cursor.getCount()<1) // UserName Not Exist
+    public String getSinlgeEntry(String userName) {
+
+        Toast.makeText(context, "String is "+userName, Toast.LENGTH_SHORT).show();
+        Cursor cursor = db.query("LOGIN", null, " USERNAME=?", new String[]{userName}, null, null, null);
+        if (cursor.getCount() < 1) // UserName Not Exist
         {
             cursor.close();
-            return "NOT EXIST";
+            return "No";
+        } else {
+
+            cursor.moveToFirst();
+            String password = cursor.getString(cursor.getColumnIndex("PASSWORD"));
+            String username = cursor.getString(cursor.getColumnIndex("USERNAME"));
+            String phoneno = cursor.getString(cursor.getColumnIndex(key_phone));
+            String Email = cursor.getString(cursor.getColumnIndex(key_email));
+            String nameuser = cursor.getString(cursor.getColumnIndex(key_name));
+            cursor.close();
+            return password + "," + username + "," + phoneno + "," + Email + "," + nameuser;
         }
-        cursor.moveToFirst();
-        String password= cursor.getString(cursor.getColumnIndex("PASSWORD"));
-        String username= cursor.getString(cursor.getColumnIndex("USERNAME"));
-        String phoneno= cursor.getString(cursor.getColumnIndex(key_phone));
-        String Email= cursor.getString(cursor.getColumnIndex(key_email));
-        String nameuser=cursor.getString(cursor.getColumnIndex(key_name));
-        cursor.close();
-        return password+","+username+","+phoneno+","+Email+","+nameuser;
+
     }
-    public void updateEntry(String userName,String password)
+    public void updateEntry(String userName,String password,String phone,String email,String name)
     {
 // Define the updated row content.
         ContentValues updatedValues = new ContentValues();
 // Assign values for each row.
         updatedValues.put("USERNAME", userName);
         updatedValues.put("PASSWORD",password);
+        updatedValues.put(key_phone,phone);
+        updatedValues.put(key_email,email);
+        updatedValues.put(key_name,name);
         String where="USERNAME = ?";
-        db.update("LOGIN",updatedValues, where, new String[]{userName});
+        try {
+            db.update("LOGIN", updatedValues, where, new String[]{userName});
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(context, "Error is WTF "+e, Toast.LENGTH_SHORT).show();
+        }
     }
 }
