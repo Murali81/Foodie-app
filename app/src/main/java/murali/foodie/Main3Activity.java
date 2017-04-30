@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static murali.foodie.R.drawable.button_bg_round;
+import static murali.foodie.R.drawable.button_rect;
 
 public class Main3Activity extends AppCompatActivity {
     List<EditText> allEds = new ArrayList<EditText>();
@@ -103,6 +105,7 @@ public class Main3Activity extends AppCompatActivity {
 
         Button cart = new Button(this);
         cart.setText(string);
+        cart.setBackgroundColor(Color.parseColor("#f29d13"));
    //   cart.setBackgroundColor(077746010);
      //   cart.setTextColor(0xff0000);
         for (int j = 0; j < allEds.size(); j++) {

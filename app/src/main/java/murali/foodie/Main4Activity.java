@@ -1,6 +1,7 @@
 package murali.foodie;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,7 +42,8 @@ public class Main4Activity extends AppCompatActivity {
         tv9.setText("Item");tv10.setText("Price");tv11.setText("Qty.");
         l1.addView(myw);
         TextView tv90=new TextView(this);
-        tv90.setText("---------------------------------------------------------------------------------------------");
+        tv90.setText("------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        tv90.setBackgroundColor(Color.parseColor("#f2f0f0"));
        // tv90.setTextColor(R.color.colorPrimary);
         tv90.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,50));
         l1.addView(tv90);
@@ -66,22 +68,28 @@ public class Main4Activity extends AppCompatActivity {
         TextView tv4=new TextView(this);
         tv4.setText("-----------------------------------------------------------------------------------------------------------------------------------------------------------------");
         tv4.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,50));
+        tv4.setBackgroundColor(Color.parseColor("#f2f0f0"));
         l1.addView(tv4);
+        tv90.setBackgroundColor(Color.parseColor("#f2f0f0"));
         if(total==0)
         {
             TextView tv7=new TextView(this);
             tv7.setText("\t\t\t\t\t\t\t\t\t\t\t\t"+"Your cart seems empty");
             tv7.setTextSize(30);
             l1.addView(tv7);
+            tv7.setBackgroundColor(Color.parseColor("#f2f0f0"));
         }
         else {
             TextView tv5 = new TextView(this);
-            tv5.setText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "Total :" + total);
+            tv5.setText("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "Total :" + total+" ₹");
             tv5.setTextSize(30);
             l1.addView(tv5);
+            tv5.setBackgroundColor(Color.parseColor("#f2f0f0"));
         }
         Button bt=new Button(this);
         bt.setText("Finish Payment");
+        bt.setBackgroundColor(Color.parseColor("#f29d13"));
+
         final String finalOrder = order;
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,9 +102,9 @@ public class Main4Activity extends AppCompatActivity {
 
                             GMailSender sender = new GMailSender(
 
-                                    "k.suhaas7@gmail.com",
+                                    "foodie.bmu@gmail.com",
 
-                                    "9959440709");
+                                    "foodieapp1");
 
 
 

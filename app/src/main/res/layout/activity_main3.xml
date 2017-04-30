@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+
 <LinearLayout    android:id="@+id/activity_main3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,5 +14,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="murali.foodie.Main3Activity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MENU"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:paddingBottom="10dp"/>
 </LinearLayout>
 </ScrollView>
