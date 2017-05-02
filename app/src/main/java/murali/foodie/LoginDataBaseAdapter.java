@@ -98,7 +98,7 @@ public class LoginDataBaseAdapter {
     }
     public String getSinlgeEntry(String userName) {
 
-        Toast.makeText(context, "String is "+userName, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "String is "+userName, Toast.LENGTH_SHORT).show();
         Cursor cursor = db.query("LOGIN", null, " USERNAME=?", new String[]{userName}, null, null, null);
         if (cursor.getCount() < 1) // UserName Not Exist
         {
