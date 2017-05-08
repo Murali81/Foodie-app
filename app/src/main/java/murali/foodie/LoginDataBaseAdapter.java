@@ -133,7 +133,7 @@ public class LoginDataBaseAdapter {
         }
         catch (Exception e)
         {
-            Toast.makeText(context, "Error is WTF "+e, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Error is  "+e, Toast.LENGTH_SHORT).show();
         }
     }
 }
