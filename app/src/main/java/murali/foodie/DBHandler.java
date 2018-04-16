@@ -49,7 +49,7 @@ public class DBHandler extends SQLiteOpenHelper{
     {
         SQLiteDatabase db=this.getWritableDatabase();
         db.delete(table_name,key_item+"=?",new String[]{String.valueOf(shop.getItem())});
-    db.close();
+        db.close();
     }
     public void dltitem(String str)
     {
@@ -92,6 +92,7 @@ public class DBHandler extends SQLiteOpenHelper{
 // return shop
         return contact;
     }
+
     public void updateShop(String itemname,int prize) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -109,6 +110,7 @@ public class DBHandler extends SQLiteOpenHelper{
         values.put(key_price, String.valueOf(prize));
 // updating row
        db1.update(table_name, values,key_itemid+ " = ?",new String[]{String.valueOf(shop.getItemId())});
+
         db1.close();
     }
 }
