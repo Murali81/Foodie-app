@@ -6,4 +6,4 @@ Clone the repo && Enjoy!
 ![alt text](https://github.com/Murali81/Foodie-app/blob/master/images.PNG)
 ![alt text](https://github.com/Murali81/Foodie-app/blob/master/images1.PNG)
 ![alt text](https://github.com/Murali81/Foodie-app/blob/master/images2.PNG)
-![alt text](https://github.com/Murali81/Foodie-app/blob/master/images3.PNG)
+![alt text](https://github.com/Murali81/Foodie-app/blob/master/images4.PNG)
